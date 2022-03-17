@@ -1,13 +1,11 @@
 import Grid from "./Grid.js";
-import Tile from "/Tile.js";
+import Tile from "./Tile.js";
 
 const gameBoard = document.getElementById("game-board");
 
 const grid = new Grid(gameBoard);
-
 grid.randomEmptyCell().tile = new Tile(gameBoard);
 grid.randomEmptyCell().tile = new Tile(gameBoard);
-
 setupInput();
 
 function setupInput() {
@@ -44,13 +42,11 @@ async function handleInput(e) {
 			}
 			await moveRight();
 			break;
-
 		default:
 			setupInput();
-			break;
+			return;
 	}
 
-	//Other code
 	grid.cells.forEach((cell) => cell.mergeTiles());
 
 	const newTile = new Tile(gameBoard);
@@ -62,6 +58,7 @@ async function handleInput(e) {
 		});
 		return;
 	}
+
 	setupInput();
 }
 
@@ -94,6 +91,7 @@ function slideTiles(cells) {
 					if (!moveToCell.canAccept(cell.tile)) break;
 					lastValidCell = moveToCell;
 				}
+
 				if (lastValidCell != null) {
 					promises.push(cell.tile.waitForTransition());
 					if (lastValidCell.tile != null) {
@@ -114,7 +112,7 @@ function canMoveUp() {
 }
 
 function canMoveDown() {
-	return canMove(grid.cellsByColumn).map((column) => [...column].reverse());
+	return canMove(grid.cellsByColumn.map((column) => [...column].reverse()));
 }
 
 function canMoveLeft() {
@@ -122,7 +120,7 @@ function canMoveLeft() {
 }
 
 function canMoveRight() {
-	return canMove(grid.cellsByRow).map((row) => [...row].reverse());
+	return canMove(grid.cellsByRow.map((row) => [...row].reverse()));
 }
 
 function canMove(cells) {
