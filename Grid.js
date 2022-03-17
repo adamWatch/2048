@@ -4,11 +4,12 @@ const CELL_GAP = 2;
 
 export default class Grid {
 	#cells;
+
 	constructor(gridElement) {
 		gridElement.style.setProperty("--grid-size", GRID_SIZE);
 		gridElement.style.setProperty("--cell-size", `${CELL_SIZE}vmin`);
 		gridElement.style.setProperty("--cell-gap", `${CELL_GAP}vmin`);
-		this.#cells = createCellElement(gridElement).map((cellElement, index) => {
+		this.#cells = createCellElements(gridElement).map((cellElement, index) => {
 			return new Cell(
 				cellElement,
 				index % GRID_SIZE,
@@ -21,18 +22,18 @@ export default class Grid {
 		return this.#cells;
 	}
 
-	get cellsByColumn() {
+	get cellsByRow() {
 		return this.#cells.reduce((cellGrid, cell) => {
-			cellGrid[cell.x] = cellGrid[cell.x] || [];
-			cellGrid[cell.y][cell.y] = cell;
+			cellGrid[cell.y] = cellGrid[cell.y] || [];
+			cellGrid[cell.y][cell.x] = cell;
 			return cellGrid;
 		}, []);
 	}
 
-	get cellsByRow() {
+	get cellsByColumn() {
 		return this.#cells.reduce((cellGrid, cell) => {
-			cellGrid[cell.y] = cellGrid[cell.y] || [];
-			cellGrid[cell.x][cell.x] = cell;
+			cellGrid[cell.x] = cellGrid[cell.x] || [];
+			cellGrid[cell.x][cell.y] = cell;
 			return cellGrid;
 		}, []);
 	}
@@ -105,7 +106,7 @@ class Cell {
 	}
 }
 
-function createCellElement(gridElement) {
+function createCellElements(gridElement) {
 	const cells = [];
 	for (let i = 0; i < GRID_SIZE * GRID_SIZE; i++) {
 		const cell = document.createElement("div");
@@ -113,6 +114,5 @@ function createCellElement(gridElement) {
 		cells.push(cell);
 		gridElement.append(cell);
 	}
-
 	return cells;
 }
