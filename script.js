@@ -2,6 +2,7 @@ import Grid from "./Grid.js";
 import Tile from "./Tile.js";
 
 const gameBoard = document.getElementById("game-board");
+const body = document.querySelector("body");
 
 const grid = new Grid(gameBoard);
 grid.randomEmptyCell().tile = new Tile(gameBoard);
@@ -52,9 +53,11 @@ async function handleInput(e) {
 	const newTile = new Tile(gameBoard);
 	grid.randomEmptyCell().tile = newTile;
 
+	isWin();
+
 	if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
 		newTile.waitForTransition(true).then(() => {
-			alert("You lose");
+			lose();
 		});
 		return;
 	}
@@ -131,5 +134,63 @@ function canMove(cells) {
 			const moveToCell = group[index - 1];
 			return moveToCell.canAccept(cell.tile);
 		});
+	});
+}
+
+function isWin() {
+	const allTiles = document.querySelectorAll(".tile");
+	let score;
+
+	allTiles.forEach((tile) => {
+		if (tile === undefined) return;
+		score = countScore();
+		if (tile.innerText === "855") {
+			win(score);
+		}
+	});
+}
+
+function countScore() {
+	const allTiles = document.querySelectorAll(".tile");
+	const scoreEl = document.querySelector(".score");
+	let score = 0;
+
+	allTiles.forEach((tile) => {
+		if (tile === undefined) return;
+		score += Number(tile.innerText);
+		scoreEl.innerText = score;
+	});
+
+	return score;
+}
+
+function win(score) {
+	body.innerHTML = `<div class="win">
+	<h1>You Win!!!</h1>
+	<h2>Congratulations</h2>
+	<h3>Score: ${score}</h3>
+	<h3>Pass: </h3>
+	<button id="reset">Reset</button>
+</div>`;
+
+	const reset = document.getElementById("reset");
+	reset.addEventListener("click", () => {
+		location.reload();
+	});
+}
+
+function lose() {
+	const score = document.querySelector(".score").innerText;
+
+	body.innerHTML = `<div class="win">
+	<h1>You lose!!!</h1>
+	<h2>Try again</h2>
+	<h3>Score: ${score}</h3>
+	<button id="reset">Reset</button>
+</div>`;
+
+	const reset = document.getElementById("reset");
+	reset.addEventListener("click", () => {
+		location.reload();
 	});
 }
