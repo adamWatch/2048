@@ -8,6 +8,7 @@
 body {
 	background-color: #333;
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
@@ -62,4 +63,63 @@ body {
 		opacity: 0.5;
 		transform: scale(0);
 	}
+}
+
+/* score */
+
+.score__container {
+	color: rgb(30, 28, 163);
+	display: flex;
+	width: 30%;
+	background-color: rgb(218, 216, 216);
+	justify-content: center;
+	border-radius: 10px 10px 0 0;
+}
+.score {
+	color: black;
+}
+
+/* win card style */
+
+.win {
+	display: flex;
+	flex-direction: column;
+	width: 80%;
+	height: 80%;
+	background: rgb(98, 99, 42);
+	background: radial-gradient(
+		circle,
+		rgba(98, 99, 42, 1) 0%,
+		rgba(74, 26, 122, 1) 82%,
+		rgba(63, 4, 131, 1) 100%
+	);
+	border-radius: 10px;
+	padding: 1rem;
+	font-size: 2rem;
+	align-items: center;
+	color: azure;
+}
+
+h1 {
+	margin: 0;
+}
+h3 {
+	margin: 0;
+}
+
+#reset {
+	background-color: purple;
+	color: azure;
+	font-size: 2.5rem;
+	padding: 0.6rem;
+	width: 40%;
+	border: none;
+	box-shadow: 4px 5px 7px 10px rgba(88, 28, 148, 0.3);
+	transition: background-color 0.2s linear;
+	cursor: pointer;
+	margin-top: 1.5rem;
+}
+
+#reset:hover {
+	background-color: rgb(148, 5, 148);
 }
