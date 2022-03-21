@@ -1,5 +1,6 @@
 import Grid from "./Grid.js";
 import Tile from "./Tile.js";
+let score = 0;
 
 const gameBoard = document.getElementById("game-board");
 const body = document.querySelector("body");
@@ -53,6 +54,8 @@ async function handleInput(e) {
 	const newTile = new Tile(gameBoard);
 	grid.randomEmptyCell().tile = newTile;
 
+	console.log(score);
+	//liczenie punktów
 	isWin();
 
 	if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
@@ -99,6 +102,8 @@ function slideTiles(cells) {
 					promises.push(cell.tile.waitForTransition());
 					if (lastValidCell.tile != null) {
 						lastValidCell.mergeTile = cell.tile;
+
+						score += Number(countScore(cell.tile.value));
 					} else {
 						lastValidCell.tile = cell.tile;
 					}
@@ -137,31 +142,21 @@ function canMove(cells) {
 	});
 }
 
+//My "improvement":) or impoverish
+
 function isWin() {
 	const allTiles = document.querySelectorAll(".tile");
-	let score;
 
 	allTiles.forEach((tile) => {
 		if (tile === undefined) return;
-		score = countScore();
 		if (tile.innerText === "855") {
 			win(score);
 		}
 	});
 }
 
-function countScore() {
-	const allTiles = document.querySelectorAll(".tile");
-	const scoreEl = document.querySelector(".score");
-	let score = 0;
-
-	allTiles.forEach((tile) => {
-		if (tile === undefined) return;
-		score += Number(tile.innerText);
-		scoreEl.innerText = score;
-	});
-
-	return score;
+function countScore(tile) {
+	return Number(tile * 2);
 }
 
 function win(score) {
