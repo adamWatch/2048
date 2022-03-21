@@ -56,16 +56,10 @@ async function handleInput(e) {
 	const newTile = new Tile(gameBoard);
 	grid.randomEmptyCell().tile = newTile;
 
-	//liczenie punktów
+	//count Point
 	score.showScore();
 	isWin();
-
-	if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
-		newTile.waitForTransition(true).then(() => {
-			lose();
-		});
-		return;
-	}
+	isLose(newTile);
 
 	setupInput();
 }
@@ -154,6 +148,15 @@ function isWin() {
 			win(score);
 		}
 	});
+}
+
+function isLose(newTile) {
+	if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
+		newTile.waitForTransition(true).then(() => {
+			lose();
+		});
+		return;
+	}
 }
 
 function win(score) {
