@@ -1,6 +1,6 @@
 import Grid from "./Grid.js";
 import Tile from "./Tile.js";
-let score = 0;
+import Score from "./Score.js";
 
 const gameBoard = document.getElementById("game-board");
 const body = document.querySelector("body");
@@ -8,6 +8,8 @@ const body = document.querySelector("body");
 const grid = new Grid(gameBoard);
 grid.randomEmptyCell().tile = new Tile(gameBoard);
 grid.randomEmptyCell().tile = new Tile(gameBoard);
+//My class
+const score = new Score();
 setupInput();
 
 function setupInput() {
@@ -54,8 +56,8 @@ async function handleInput(e) {
 	const newTile = new Tile(gameBoard);
 	grid.randomEmptyCell().tile = newTile;
 
-	console.log(score);
 	//liczenie punktów
+	score.showScore();
 	isWin();
 
 	if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
@@ -102,8 +104,7 @@ function slideTiles(cells) {
 					promises.push(cell.tile.waitForTransition());
 					if (lastValidCell.tile != null) {
 						lastValidCell.mergeTile = cell.tile;
-
-						score += Number(countScore(cell.tile.value));
+						score.countScore(cell.tile.value);
 					} else {
 						lastValidCell.tile = cell.tile;
 					}
@@ -153,10 +154,6 @@ function isWin() {
 			win(score);
 		}
 	});
-}
-
-function countScore(tile) {
-	return Number(tile * 2);
 }
 
 function win(score) {
