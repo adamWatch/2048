@@ -2,6 +2,7 @@ import Grid from "./Grid.js";
 import Tile from "./Tile.js";
 import Score from "./Score.js";
 import Win from "./Win.js";
+import Lose from "./Lose.js";
 
 const gameBoard = document.getElementById("game-board");
 const body = document.querySelector("body");
@@ -154,24 +155,8 @@ function isWin() {
 function isLose(newTile) {
 	if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
 		newTile.waitForTransition(true).then(() => {
-			lose();
+			const lose = new Lose(body, score.result);
 		});
 		return;
 	}
-}
-
-function lose() {
-	const score = document.querySelector(".score").innerText;
-
-	body.innerHTML = `<div class="win">
-	<h1>You lose!!!</h1>
-	<h2>Try again</h2>
-	<h3>Score: ${score}</h3>
-	<button id="reset">Reset</button>
-</div>`;
-
-	const reset = document.getElementById("reset");
-	reset.addEventListener("click", () => {
-		location.reload();
-	});
 }
