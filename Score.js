@@ -7,6 +7,10 @@ export default class Score {
 		Number((this.#result += tile));
 	}
 
+	get result() {
+		return this.#result;
+	}
+
 	showScore() {
 		const resultSpan = document.querySelector(".score");
 		resultSpan.innerText = this.#result;
