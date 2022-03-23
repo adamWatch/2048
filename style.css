@@ -81,7 +81,8 @@ body {
 
 /* win card style */
 
-.win {
+.win,
+.lose {
 	display: flex;
 	flex-direction: column;
 	width: 80%;
