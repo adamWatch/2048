@@ -45,28 +45,28 @@ function setupInput() {
 
 async function handleInput(e, direction) {
 	switch (e.key || direction) {
-		case "ArrowUp":
+		case "ArrowUp" || "up":
 			if (!canMoveUp()) {
 				setupInput();
 				return;
 			}
 			await moveUp();
 			break;
-		case "ArrowDown":
+		case "ArrowDown" || "down":
 			if (!canMoveDown()) {
 				setupInput();
 				return;
 			}
 			await moveDown();
 			break;
-		case "ArrowLeft":
+		case "ArrowLeft" || "left":
 			if (!canMoveLeft()) {
 				setupInput();
 				return;
 			}
 			await moveLeft();
 			break;
-		case "ArrowRight":
+		case "ArrowRight" || "right":
 			if (!canMoveRight()) {
 				setupInput();
 				return;
