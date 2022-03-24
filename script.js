@@ -44,6 +44,7 @@ function setupInput() {
 }
 
 async function handleInput(e, direction) {
+	console.log(direction);
 	switch (e.key || direction) {
 		case "ArrowUp" || "up":
 			if (!canMoveUp()) {
