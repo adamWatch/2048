@@ -78,41 +78,7 @@ async function handleInput(e, direction) {
 			return;
 	}
 	//touch Switch
-	function moveInDirection(direction) {
-		switch (direction) {
-			case "up":
-				if (!canMoveUp()) {
-					setupInput();
-					return;
-				}
-				await moveUp();
-				break;
-			case "down":
-				if (!canMoveDown()) {
-					setupInput();
-					return;
-				}
-				await moveDown();
-				break;
-			case "left":
-				if (!canMoveLeft()) {
-					setupInput();
-					return;
-				}
-				await moveLeft();
-				break;
-			case "right":
-				if (!canMoveRight()) {
-					setupInput();
-					return;
-				}
-				await moveRight();
-				break;
-			default:
-				setupInput();
-				return;
-		}
-	}
+
 	//touch
 	grid.cells.forEach((cell) => cell.mergeTiles());
 
