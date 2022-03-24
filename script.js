@@ -47,28 +47,56 @@ async function handleInput(e, direction) {
 	console.log(direction);
 	console.log(e.key);
 	switch (direction || e.key) {
-		case "ArrowUp" || "up":
+		case "ArrowUp":
 			if (!canMoveUp()) {
 				setupInput();
 				return;
 			}
 			await moveUp();
 			break;
-		case "ArrowDown" || "down":
+		case "ArrowDown":
 			if (!canMoveDown()) {
 				setupInput();
 				return;
 			}
 			await moveDown();
 			break;
-		case "ArrowLeft" || "left":
+		case "ArrowLeft":
 			if (!canMoveLeft()) {
 				setupInput();
 				return;
 			}
 			await moveLeft();
 			break;
-		case "ArrowRight" || "right":
+		case "ArrowRight":
+			if (!canMoveRight()) {
+				setupInput();
+				return;
+			}
+			await moveRight();
+			break;
+		case "up":
+			if (!canMoveUp()) {
+				setupInput();
+				return;
+			}
+			await moveUp();
+			break;
+		case "down":
+			if (!canMoveDown()) {
+				setupInput();
+				return;
+			}
+			await moveDown();
+			break;
+		case "left":
+			if (!canMoveLeft()) {
+				setupInput();
+				return;
+			}
+			await moveLeft();
+			break;
+		case "right":
 			if (!canMoveRight()) {
 				setupInput();
 				return;
