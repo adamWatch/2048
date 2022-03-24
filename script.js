@@ -36,7 +36,7 @@ function setupInput() {
 			checkTouchEnd(e);
 			console.log(coordinates);
 			const direction = setDirection();
-			handleInput(direction);
+			handleInput(e, direction);
 		},
 		{ once: true }
 	);
