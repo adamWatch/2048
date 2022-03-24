@@ -70,7 +70,8 @@ body {
 .score__container {
 	color: rgb(30, 28, 163);
 	display: flex;
-	width: 30%;
+	padding: 0.2rem;
+	width: 35vw;
 	background-color: rgb(218, 216, 216);
 	justify-content: center;
 	border-radius: 10px 10px 0 0;
@@ -123,4 +124,11 @@ h3 {
 
 #reset:hover {
 	background-color: rgb(148, 5, 148);
+}
+
+@media screen and (max-width: 650px) {
+	.score__container {
+		width: auto;
+		padding: 0.8rem;
+	}
 }
