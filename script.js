@@ -36,15 +36,15 @@ function setupInput() {
 			checkTouchEnd(e);
 			console.log(coordinates);
 			const direction = setDirection();
-			moveInDirection(direction);
+			handleInput(direction);
 		},
 		{ once: true }
 	);
 	//touch
 }
 
-async function handleInput(e) {
-	switch (e.key) {
+async function handleInput(e, direction) {
+	switch (e.key || direction) {
 		case "ArrowUp":
 			if (!canMoveUp()) {
 				setupInput();
@@ -223,6 +223,7 @@ function isLose(newTile) {
 }
 
 //Touch Control
+
 function checkTouchStart(e) {
 	e.preventDefault();
 
