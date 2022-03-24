@@ -78,7 +78,7 @@ async function handleInput(e) {
 			return;
 	}
 	//touch Switch
-	async function moveInDirection(direction) {
+	function moveInDirection(direction) {
 		switch (direction) {
 			case "up":
 				if (!canMoveUp()) {
