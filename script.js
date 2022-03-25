@@ -3,6 +3,7 @@ import Tile from "./Tile.js";
 import Score from "./Score.js";
 import Win from "./Win.js";
 import Lose from "./Lose.js";
+import Themes from "./Themes.js";
 
 const gameBoard = document.getElementById("game-board");
 const body = document.querySelector("body");
@@ -15,6 +16,18 @@ const score = new Score();
 setupInput();
 //To TouchControl
 const coordinates = [];
+//Theme Class
+const themeBtn = document.querySelector(".theme__btn");
+themeBtn.addEventListener("click", () => {
+	gameBoard.classList.toggle("synth");
+	if (gameBoard.classList.contains("synth")) {
+		const themes = new Themes(gameBoard, body);
+		themes.changeToSynth();
+	} else {
+		const themes = new Themes(gameBoard, body);
+		themes.changeToOrginal();
+	}
+});
 
 function setupInput() {
 	window.addEventListener("keydown", handleInput, { once: true });
@@ -32,7 +45,6 @@ function setupInput() {
 		"touchend",
 		(e) => {
 			checkTouchEnd(e);
-			console.log(coordinates);
 			const direction = setDirection();
 			handleInput(e, direction);
 		},
