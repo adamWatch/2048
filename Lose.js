@@ -3,8 +3,8 @@ export default class Win {
 		body.innerHTML = `<div class="lose">
 		<h1>You Lose!!!</h1>
 		<h3>Score: ${score}</h3>
-        <h2>Try Again</h2>
-		<button id="reset">Reset</button>
+        
+		<button id="reset">Try Again</button>
 	</div>`;
 
 		const reset = document.getElementById("reset");

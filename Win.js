@@ -4,8 +4,8 @@ export default class Win {
 		<h1>You Win!!!</h1>
 		<h2>Congratulations</h2>
 		<h3>Score: ${score}</h3>
-		<h3>Pass: </h3>
-		<button id="reset">Reset</button>
+		<h3>Pass: Pros</h3>
+		<button id="reset">Rerun</button>
 	</div>`;
 
 		const reset = document.getElementById("reset");
